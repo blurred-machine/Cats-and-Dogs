@@ -19,7 +19,7 @@ from keras.preprocessing.image import ImageDataGenerator
 
 app = Flask(__name__)
 
-
+IMAGE_SIZE = 64
 
 @app.route('/')
 def index():
@@ -31,7 +31,7 @@ def predict():
     form_data = request.form.to_dict()
     print("Uploaded image path: "+str(form_data["input_image"]))
 
-    test_image = image.load_img(form_data["input_image"], target_size = (32, 32))
+    test_image = image.load_img(form_data["input_image"], target_size = (IMAGE_SIZE, IMAGE_SIZE))
     test_image = image.img_to_array(test_image)
     test_image = np.expand_dims(test_image, axis = 0)
     print(test_image)
