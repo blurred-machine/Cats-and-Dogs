@@ -48,7 +48,13 @@
   opacity: 1;
   right: 0;
 }
+
+#img{
+	color: white; 
+	text-align: center;
+}
     </style>
+}
 </head>
 <body style="background-color: #6A359C; text-align: center">
     <div style="  text-align: center;">
@@ -58,8 +64,14 @@
       <div class="col-sm-12">
   <form action="/predict" method="POST" style="display: inline-block;">
     <div style="margin: 25px;">
+
       <label for="img" style="color: white">Select image:</label>
-      <input type="file" id="img" name="input_image" accept="image/*" style="color: white; text-align: center;">
+      <input type="file" id="img" name="input_image" accept="image/*" onchange="loadFile(event)"></br>
+
+		<label for="fname">Image Path: </label><br>
+  		<input type="text" id="img_path" name="image_path" value="John"><br>
+
+		<img id="output_img" name="img_selected" width="300" />
     </div>
         <button class="button" type="submit"><span>Submit</span></button>
 
@@ -73,6 +85,17 @@
 
 </div>
 
+<script>
+		var loadFile = function(event) {
+			var image = document.getElementById('output_img');
+			var image_id = document.getElementById('img_path');
+
+			image_id.value = URL.createObjectURL(event.target.files[0]);
+
+			image.src = URL.createObjectURL(event.target.files[0]);
+		  console.log(image.src);
+		};
+</script>
 
 </body>
 </html>
